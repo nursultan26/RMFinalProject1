@@ -11,11 +11,14 @@ module.exports = function(app, db) {
 
 	function addBooks(link) {
 		request({uri: link, method:'GET', encoding: 'binary'}, function (err, res, page) {
-			let $ = cheerio.load(page, { decodeEntities: false });
+			console.log(link)
+
+			let $ = cheerio.load(page, { decodeEntities: true });
 
 			var title = utf8.decode($('h1 .entry-title').text())
 			var description = utf8.decode($('div .entry-content').children().last().text())
 			var imgLink = $('div .et_post_meta_wrapper').find('img').attr('src')
+			
 			console.log(title)
 			books.push({
 				title,
@@ -29,20 +32,20 @@ module.exports = function(app, db) {
 		function callb(cb,hr) {
 			request({uri: 'http://books.kg/rnews/page/' + i, method:'GET', encoding:'binary'}, function (err, res, page) {
 				let $ = cheerio.load(page, { decodeEntities: true });
-				$('div .et_pb_image_container').each(function(index,elem) {
+				  let elem = $('div .et_pb_image_container')//.each(function(index,elem) {
 					elem = $(elem).find('a')
 					elem = utf8.decode($(elem).attr('href'))
 					cb(elem)
 				});
 				hr()
-			});
+			//});
 		}
 
-		for (var i = 1; i <= 3; i++) {
+		for (var i = 1; i <= 1; i++) {
 			callb(function(elem) {
-				addBooks()
+				addBooks(elem)
 			}, function() {
-				console.log(elem)
+				
 			})
 		}
 
