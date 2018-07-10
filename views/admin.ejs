@@ -1,0 +1,30 @@
+<%- include('./header.ejs', {path: '../'}); %>
+<div class="main-container">
+    <section class="space--sm">
+        <div class="container">
+            <div class="col-sm-7 col-md-5">
+                <form action="/books/add" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="text" placeholder="Title" name="title"/>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="text" placeholder="Author" name="author"/>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="description" placeholder="Description" name="description"/>
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="file" name="image" accept="image/*">
+                        </div>
+                        <div class="col-sm-12">
+                            <button class="btn btn--primary type--uppercase" type="submit">Add book</button>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </form>
+            </div>
+        </div>
+        <!--end of container-->
+    </section>
+<%- include('./footer.ejs', {path: '../'}); %>

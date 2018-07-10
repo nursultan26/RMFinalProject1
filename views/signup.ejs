@@ -1,0 +1,46 @@
+<%- include('./header.ejs', {path: '../'}); %>
+    <div class="main-container">
+        <section class="height-100 imagebg text-center" data-overlay="4">
+            <div class="background-image-holder">
+                <img alt="background" src="../img/inner-6.jpg" />
+            </div>
+            <div class="container pos-vertical-center">
+                <div class="row">
+                    <div class="col-sm-7 col-md-5">
+                        <h2>Register to continue</h2>
+                        <a class="btn block btn--icon bg--facebook type--uppercase" href="#">
+                            <span class="btn__text">
+                                <i class="socicon-facebook"></i>
+                                Login with Facebook
+                            </span>
+                        </a>
+                        <hr>
+                        <p>Login using your Stack account</p>
+                        <form action="/users/signup" method="POST">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="email" placeholder="Email" name="email"/>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="password" placeholder="Password" name="pass"/>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button class="btn btn--primary type--uppercase" type="submit">Login</button>
+                                </div>
+                            </div>
+                            <!--end of row-->
+                        </form>
+                        <span class="type--fine-print block">Dont have an account yet?
+                            <a href="#">Create account</a>
+                        </span>
+                        <span class="type--fine-print block">Forgot your username or password?
+                            <a href="#">Recover account</a>
+                        </span>
+                    </div>
+                </div>
+                <!--end of row-->
+            </div>
+            <!--end of container-->
+        </section>
+    </div>
+<%- include('./footer.ejs', {path: '../'}); %>
