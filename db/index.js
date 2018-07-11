@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const bookModel = require('./models/book')
+const userModel = require('./models/user')
 const config = require('../config')
 
 const sequelize = new Sequelize(config.database, config.user, config.dbPassword, {
@@ -14,6 +15,7 @@ const sequelize = new Sequelize(config.database, config.user, config.dbPassword,
 })
 
 const Book = bookModel(sequelize, Sequelize)
+const User = userModel(sequelize, Sequelize)
 
 sequelize.sync({ force: false })
   .then(() => {
@@ -21,5 +23,6 @@ sequelize.sync({ force: false })
   })
 
 module.exports = {
+  User,
   Book
 }
