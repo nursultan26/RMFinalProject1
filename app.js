@@ -19,40 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-var con = mysql.createConnection({
-  host: config.host,
-  user: config.user,
-  password: config.dbPassword,
-  database: config.database	
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-  con.query(`CREATE TABLE IF NOT EXISTS User (
-  		Id int NOT NULL AUTO_INCREMENT,
-  		Email VARCHAR(255) UNIQUE NOT NULL,
-  		Password VARCHAR(255) NOT NULL,
-  		Name VARCHAR(255),
-  		PRIMARY KEY (Id)
-  	);`, function (err, result) {
-    	if (err) throw err;
-    	console.log("Users table created");
-  });
-
-  con.query(`CREATE TABLE IF NOT EXISTS Book (
-      Id int NOT NULL AUTO_INCREMENT,
-      Title VARCHAR(255) NOT NULL,
-      Description VARCHAR(255) NOT NULL,
-      Image VARCHAR(255) NOT NULL,
-      Author VARCHAR(255) NOT NULL,
-      PRIMARY KEY (Id)
-    );`, function (err, result) {
-      if (err) throw err;
-      console.log("Books table created");
-  });
-});
+var db = require('./db/index')
 
 app.use(function(req, res, next) {
   //set user value
@@ -67,7 +34,7 @@ app.use(function(req, res, next) {
 /* Configure routes */
 var routes = glob.sync('./routes/*.js');
 routes.forEach(function(route) {
-  require(route)(app, con);
+  require(route)(app, db);
 })
 
 // catch 404 and forward to error handler

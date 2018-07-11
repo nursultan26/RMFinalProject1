@@ -6,13 +6,14 @@ var sendEmail = require('../helpers/sendEmail')
 var multer = require('multer');
 var upload = multer({dest: './public/img'});
 
-module.exports = function(app, conn) {
+module.exports = function(app, db) {
 
 	router.get('/',function(req, res) {
-		var sql = "select * FROM Book;";
-		conn.query(sql, function (err, books) {
+		db.Book.findAll().then(books => {
 			res.render('books', {books});
 		})
+			
+		
 	});
 
 
